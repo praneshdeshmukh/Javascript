@@ -1,0 +1,39 @@
+class classname {
+    #real;
+    #imaginary;
+    constructor (r,i){
+        this.#real = r // = 2 then 5
+        this.#imaginary = i // = 3 then 6
+    }
+    get name() {
+        return this.#real // return 5
+    }
+    get name2() {
+        return this.#imaginary //return 6
+    }   
+
+    display () {
+        console.log(this.#real, "+ i",this.#imaginary)
+        // 2 + i 3
+        // 7 + i 9
+    }
+
+    memberfunction (arg) {
+        this.#real = this.#real + arg.name // real = 2 + variable2.name 
+        this.#imaginary = this.#imaginary + arg.name2 //imag = 3 + variable2.name2
+    }
+}
+const variable = new classname(2,3) ; //{#real : 2, #imaginary : 3}
+console.log(variable)
+variable.display() // 2 + i 3
+variable.property = 20;
+console.log(variable) // { property: 20, #real: 2, #imaginary: 3 }
+
+const variable2 = new classname(5,6) // { #real: 5, #imaginary: 6 }
+console.log(variable2);
+variable.memberfunction(variable2) // { property: 20, #real: 7, #imaginary: 9 }
+console.log(variable);
+console.log(variable2); // { #real: 5, #imaginary: 6 }
+variable.display() // 7 + i 9
+
+
