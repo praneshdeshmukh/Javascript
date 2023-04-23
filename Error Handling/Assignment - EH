@@ -1,0 +1,211 @@
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// 01 Type conversion
+
+function convertToNumber(str){
+    let equivalentnum = Number.parseInt(str)
+    try{
+        if(isNaN(equivalentnum)) {
+                // if it is a string
+               throw new Error("Invalid input")
+             }
+         console.log(equivalentnum);
+        //  if its not
+    }
+    catch(error) {
+        console.log(error.message);
+    }
+}
+convertToNumber("1256");
+convertToNumber("awesome")
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//  Building Robust Functions in JavaScript
+
+console.log(getPerson({name : "Mithun", age : 20}));
+console.log(getPerson({name : "Mithun"}));
+console.log(getPerson(["name" , "Mithun"]));
+console.log(getPerson({name : "pranesh", age : 19}));
+
+function getPerson(person) {
+    try {
+    if (typeof person !== "object" || !person.hasOwnProperty("name") || !person.hasOwnProperty("age")) {
+        throw new Error("Inavlid Parameter")
+    }
+    else {
+    return `Name: ${person.name}, Age : ${person.age}`;
+    }
+    }
+    catch (error) {
+        return error.message;
+        }
+}
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// 03 Create a class called Car with three properties: company, model, and year. The class should have a method
+// called getDescription that returns a string in the format "This is a <year> <company> <model>". Instantiate an
+// instance of the Car class and call the getDescription method.
+class Car {
+    company ;
+    model; 
+    year ;
+
+    constructor(y,m,c) {
+        this.company = c;
+        this.model = m;
+        this.year = y;
+    }
+    getDescription() {
+        return  `This is a ${this.year} ${this.model} ${this.company}`;
+    }
+}
+const myCar = new Car("Rapid","skoda",2022);
+// console.log(myCar);
+console.log(myCar.getDescription());
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// 04 Employee class challenge
+class employee {
+    name;
+    position;
+    salary;
+    constructor (n,p,s) {
+        this.name = "pranesh"
+        this.position = "Intern"
+        this.salary = 8000
+    }
+    getSalary() {
+        return employee1.salary
+    }
+}
+const employee1 = new employee();
+console.log(employee1.getSalary()); // 8000
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// 05 Implementing a person class with default values
+class Person {
+    name;
+    age;
+    constructor(name = 'Unknown',age = 0) { //default parameters
+        this.name = name
+        this.age = age
+    }
+    getDetails() {
+        return `Name : ${this.name}, Age : ${this.age}`
+    }
+}
+const person1 = new Person("Mithun",20)
+console.log(person1.getDetails());
+
+const person2 = new Person()
+console.log(person2.getDetails());
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// 06 Using Static method to add two numbers with calculator class
+class calculator {
+    static add(num1, num2) {
+        return num1 + num2;
+    }
+}
+const result = calculator.add(10,5)
+console.log(result);
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// 07 Password Checker
+
+class User {
+    constructor(username, password) {
+      this.username = username;
+      this.password = password;
+    }
+  
+    get password() {
+      return this._password.replace(/./g, '*');
+    }
+  
+    set password(newPassword) {
+      if (newPassword.length < 8 || !/\d/.test(newPassword) || !/[A-Z]/.test(newPassword)) {
+        console.error('Error: Password must be at least 8 characters long and contain at least one number and one uppercase letter.');
+      } else {
+        this._password = newPassword;
+      }
+    }
+  }
+  
+// create a new user
+const user = new User('Mithun', 'Password123');
+
+// get the password (will be  asterisks)
+console.log(user.password); // output: *************
+
+// set a new password
+user.password = 'newpassword';
+
+// get the new password (will be masked with asterisks)
+console.log(user.password); // output: **********
+
+// set an invalid password
+user.password = 'weak';
+
+// an error message will be logged to the console, and the password will not be changed
+console.log(user.password); // output: **********
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// 08 Adding a method to a prototype
+
+function Student(name) {
+    this.name = name
+}
+Student.prototype.printDetails = function () {
+    console.log(`Hello, the student is ${this.name}`);
+};
+
+const student = new Student("Mithun")
+student.printDetails()
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// 09 Check the presenece using closures
+function numberChecker (array) {
+    return function ret(arr) {
+        if (array.includes(arr)){
+            return true
+        }
+        return false
+    }
+}
+const arr = [1,2,3,4,5];
+const checkNum = numberChecker(arr)
+console.log(checkNum(3));
+console.log(checkNum(6));
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// 10 Fiter by category
+function filterByCategory(prod) {
+    return function(category) {
+        prod.filter(product => product.category === category)
+    }
+}
+let products = [
+    {name : "shirt", category: "clothing"},
+    {name : "Pants", category: "clothing"},
+    {name : "Hat", category: "Accessories"},
+    {name : "Sunglasses", category: "Accessories"},
+];
+function filterByCategory(products) {
+    return function(category) {
+      return products.filter(product => product.category === category);
+    }
+  }
+  const filterProductsByCategory = filterByCategory(products);
+  
+  const filteredProducts = filterProductsByCategory("clothing");
+  
+  console.log(filteredProducts);
