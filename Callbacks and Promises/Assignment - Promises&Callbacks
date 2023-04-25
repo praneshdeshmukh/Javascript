@@ -1,0 +1,144 @@
+// +++++++++++++++++++++++++++++++++++++++++++++++
+// 01 Double using callback
+function integers(arr,callback) {
+    const doubled = arr.map((el) => {
+        return callback(el)
+    });
+    return doubled;
+}
+function callback(num) {
+    return num * 2
+}
+let arr = [5,6,80,94,53]
+let result = integers(arr,callback)
+console.log(result);
+// +++++++++++++++++++++++++++++++++++++++++
+// 02 String manipulation
+
+function manipulateString(str,callback) {
+    let store = str.toUpperCase()
+    return callback(store)
+}
+function logString(store) {
+    return `The manipulated string is : ${store}`
+}
+let sentence = "hello world!"
+let final = manipulateString(sentence,logString)
+console.log(final);
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// 03 Age in Days
+
+let obj =
+    {
+        firstname : "Mithun",
+        lastname : "S",
+        age : 20,
+    }
+function ageinDays(obj,callback) {
+    let fullName = `${obj.firstname} ${obj.lastname}`
+    // console.log(fullName);
+    let ageinDays = obj.age * 365
+    // console.log(ageinDays);
+    return callback(fullName,ageinDays)
+}
+function log(fullName,ageinDays) {
+    return `The person's full name is ${fullName} and their age in days is ${ageinDays}`
+}
+let finalAge = ageinDays(obj,log)
+console.log(finalAge);
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// 04 Arrange in alphabetical order
+const objList = [
+    {
+        title: "The Great Gatsby",
+        author: "F. Scott Fitzgerald",
+        year: 1925,
+    },
+    {
+        title: "To Kill a Mockingbird",
+        author: "Harper Lee",
+        year: 1960,
+    },
+    {
+        title: "Who are you?",
+        author: "George Orwell",
+        year: 1949
+    },
+    {
+        title: "Pride and Prejudice",
+        author: "jane AUsten",
+        year: 1813
+    },
+];
+function books(objList,callback) {
+    let onlyTitles = objList.map((el)=> el.title)
+    // console.log(onlyTitles);
+    callback(onlyTitles)
+} 
+function logTitles(onlytitles) {
+    onlytitles.sort();
+    console.log(onlytitles.join(" , "));
+}
+books(objList,logTitles)
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// 05 Greeting Promise
+
+function greeting(name) {
+    return new Promise((resolve,reject) => {
+        const myname = `${name}`
+        resolve(myname)
+    })
+}
+greeting("Pranesh").then((msg) => {
+    console.log("Hello " + msg);
+})
+// ++++++++++++++++++++++++++++++++++++++++++++
+// 06 Fetch results asynchronously
+
+async function fetching() {
+    const data = await fetch("https://jsonplaceholder.typicode.com/todos/1")
+    const results = await data.json()
+    console.log(results);
+}
+fetching()
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// 07 Multiple requests
+/* Create an asynchronous function that retrieves data from two different API endpoints: "https://
+jsonplaceholder.typicode.com/todos/1" and "https://jsonplaceholder.typicode.com/posts/1". The first API returns
+a to-do task, while the second API provides post details. The function should combine the results from both APIs
+and log them as an object, where the keys are "todo" and "post", and the corresponding values are the
+responses from the respective APIs. */
+async function combinedData() {
+    const [api1,api2] = await Promise.all([
+    fetch("https://jsonplaceholder.typicode.com/todos/1")
+    .then((response) => response.json() ),
+    fetch("https://jsonplaceholder.typicode.com/posts/1")
+    .then((response) => response.json()),
+    ]);
+    const combinedData = {
+        todo : api1,
+        post : api2,
+    }
+    return combinedData
+}
+combinedData().then((data) => console.log(data))
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// 08 Get Data from API and Display it on browser console
+fetch("https://jsonplaceholder.typicode.com/posts")
+.then((response) => response.json())
+.then((value) => console.log(value))
+.catch((error) => console.error(error))
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// 09 Error Handling
+/* Write a JavaScript program that uses the Fetch method to retrieve data from an API, and then handles errors
+that may occur. For example, you could use the API at https://jsonplaceholder.typicode.com/posts/123456789
+to simulate an error, and then display an error message on the webpage.*/
+
+fetch("https://jsonplaceholder.typicode.com/posts/123456789")
+.then((response)=> {
+    if(response.ok) {
+    return response.json()
+    }else {
+    throw new Error("SERVER ISSEUE...")        
+    }
+    });
