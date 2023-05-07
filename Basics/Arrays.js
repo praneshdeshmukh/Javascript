@@ -208,3 +208,39 @@ let o4 = numbersV13
         .filter(value => value > 0)
         .map(num =>  {value: num});
 console.log(o4);
+// reducing an array
+let numbersV14 = [1,2,3,4,5]
+// forof = apply for iterables
+let total = 0
+for(let sum of numbersV14) {
+    total += sum
+}
+console.log(total); // 15
+
+let totalSum = numbersV14.reduce((accumulator,currentValue)=> accumulator + currentValue, 0)
+console.log(totalSum); // 15
+/* 
+accumulator = 0
+currentValue = 1
+accumulator = accumulator + currentValue => 0 + 1 = 1
+// ----------
+accumulator = 1
+currentValue = 2
+accumulator = accumulator + currentValue => 1 + 2 = 3
+// // ----------
+accumulator = 3
+currentValue = 3
+accumulator = accumulator + currentValue => 3 + 3 = 6
+// // ----------
+accumulator = 6
+currentValue = 4
+accumulator = accumulator + currentValue => 6 + 4 = 10
+// // ----------
+accumulator = 10
+currentValue = 5
+accumulator = accumulator + currentValue => 10 + 5 = 15 
+*/
+
+// // accumulator = total like in previous example
+// // currentValue = value like in previous example
+// // 0 (not mandatory to write, default accumu starts from first value/ index) => accumulator = 0 just like total = 0 in previous example 
