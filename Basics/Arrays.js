@@ -63,7 +63,8 @@
 // console.log(numbers);
 // console.log(numbers.indexOf(9));
 
-// // we want to check if number is present in an array
+// // we want to check if number is present in an 
+// sjdjsii
 // if(numbers.indexOf(9) !== -1) {
 //     console.log("present");
 // }
